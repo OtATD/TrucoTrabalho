@@ -55,10 +55,99 @@ programa {
     menuInicio()
 
   }
+
+
+
+  funcao menuJogo(){
+    para(numeroMao = 0; numeroMao < 12; numeroMao++){
+    sorteioCartas()
+      para(numeroRodadas = 0; numeroRodadas < 3; numeroRodadas++){
+        cartaJogada1 = ""
+       
+        escreva("Rodada - Jogador ", 1, ": ", rodadaP1,"\n")
+        escreva("Rodada - Jogador ", 2, ": ", rodadaP2,"\n")
+        escreva("MÃ£o - Jogador ", 1, ": ", maoP1,"\n")
+        escreva("MÃ£o - Jogador ", 2, ": ", maoP2,"\n")
+        auxiliar = falso
+        enquanto(auxiliar == falso){
+          cartasJUm()
+          jogaCartasUm()
+        }
+
+        cartaJogada2 = ""
+        escreva("Rodada - Jogador ", 1, ": ", rodadaP1,"\n")
+        escreva("Rodada - Jogador ", 2, ": ", rodadaP2,"\n")
+        escreva("MÃ£o - Jogador ", 1, ": ", maoP1,"\n")
+        escreva("MÃ£o - Jogador ", 2, ": ", maoP2,"\n")
+        auxiliar = falso
+        faca{
+          cartasJDois()
+          jogaCartasDois()
+        }enquanto(auxiliar == falso)
+        acharindice()
+      }
+      VencedorMao()
+    }
+  }
+    funcao jogaCartasUm(){
+    escreva("Qual carta vai jogar?\n")
+    leia(cartaJogada1)
+    auxiliar = falso
+
+    para(inteiro I = 0; I < 3; I++){
+      se(cartaJogada1 == cartasJ1[I]){
+        cartasJ1[I] = "Jogada!"
+        auxiliar = verdadeiro
+        pare
+      }
+    }
+    se(auxiliar == falso){
+      escreva("Carta InvÃ¡lida, tente uma carta valida!!! \n")
+    }
+  }
+  funcao jogaCartasDois(){
+    escreva("Qual carta vai jogar?\n")
+    leia(cartaJogada2)
+    auxiliar = falso
+    para(inteiro I = 0; I < 3; I++){
+      se(cartaJogada2 == cartasJ2[I]){
+        cartasJ2[I] = "Jogada!"
+        auxiliar = verdadeiro
+        pare
+      }
+    }
+
+    se(auxiliar == falso){
+      escreva("Carta InvÃ¡lida, tente uma carta valida!!! \n")
+    }
+  }
+  funcao cartasJUm(){
+    escreva("Cartas do Jogador 1: \n")
+    para(inteiro I = 0; I < 3; I++){
+      escreva(cartasJ1[I],"\n")
+    }
+  }
+  funcao cartasJDois(){
+    escreva("Cartas do Jogador 2: \n")
+    para(inteiro I = 0; I < 3; I++){
+      escreva(cartasJ2[I],"\n")
+    }
+  }
+  funcao VencedorMao(){
+    se(numeroRodadas == 3){
+      se(rodadaP1 > rodadaP2){
+        maoP1 ++
+      }
+      senao se(rodadaP1 < rodadaP2){
+        maoP2 ++
+      }
+      rodadaP1 = 0
+      rodadaP2 = 0
+    }
+  }
     funcao menuInicio(){
-    
     escreva("Bem vindo ao jogo de TRUCO!\n")
-    escreva("Deseja escolher qual op��o?\n")
+    escreva("Deseja escolher qual opção?\n")
     escreva("1- Jogar\n")
     escreva("2- Sair\n")
     leia(opc_menu)
@@ -117,7 +206,6 @@ programa {
     para(inteiro I=0; I<40;I++){
       se(cartaJogada1==baralho[I]){
         jogador1 = pontuacao_cartas[I] 
-        
       }
       se(cartaJogada2==baralho[I]){
         jogador2 = pontuacao_cartas[I]
@@ -127,3 +215,4 @@ programa {
 
   }
 }
+
