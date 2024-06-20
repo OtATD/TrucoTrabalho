@@ -66,8 +66,8 @@ programa {
        
         escreva("Rodada - Jogador ", 1, ": ", rodadaP1,"\n")
         escreva("Rodada - Jogador ", 2, ": ", rodadaP2,"\n")
-        escreva("Mão - Jogador ", 1, ": ", maoP1,"\n")
-        escreva("Mão - Jogador ", 2, ": ", maoP2,"\n")
+        escreva("MÃ£o - Jogador ", 1, ": ", maoP1,"\n")
+        escreva("MÃ£o - Jogador ", 2, ": ", maoP2,"\n")
         auxiliar = falso
         enquanto(auxiliar == falso){
           cartasJUm()
@@ -77,8 +77,8 @@ programa {
         cartaJogada2 = ""
         escreva("Rodada - Jogador ", 1, ": ", rodadaP1,"\n")
         escreva("Rodada - Jogador ", 2, ": ", rodadaP2,"\n")
-        escreva("Mão - Jogador ", 1, ": ", maoP1,"\n")
-        escreva("Mão - Jogador ", 2, ": ", maoP2,"\n")
+        escreva("MÃ£o - Jogador ", 1, ": ", maoP1,"\n")
+        escreva("MÃ£o - Jogador ", 2, ": ", maoP2,"\n")
         auxiliar = falso
         faca{
           cartasJDois()
@@ -102,7 +102,7 @@ programa {
       }
     }
     se(auxiliar == falso){
-      escreva("Carta Inválida, tente uma carta valida!!! \n")
+      escreva("Carta InvÃ¡lida, tente uma carta valida!!! \n")
     }
   }
   funcao jogaCartasDois(){
@@ -118,7 +118,7 @@ programa {
     }
 
     se(auxiliar == falso){
-      escreva("Carta Inválida, tente uma carta valida!!! \n")
+      escreva("Carta InvÃ¡lida, tente uma carta valida!!! \n")
     }
   }
   funcao cartasJUm(){
@@ -144,6 +144,75 @@ programa {
       rodadaP1 = 0
       rodadaP2 = 0
     }
+  }
+    funcao menuInicio(){
+    escreva("Bem vindo ao jogo de TRUCO!\n")
+    escreva("Deseja escolher qual opção?\n")
+    escreva("1- Jogar\n")
+    escreva("2- Sair\n")
+    leia(opc_menu)
+    escolha(opc_menu){
+      caso 1:
+        menuJogo()
+      pare
+
+      caso 2:
+      escreva("Tenha um bom dia!")
+      pare
+    } 
+  }
+  funcao sorteioCartas(){
+    cartasE[0] = ""
+    cartasE[1] = ""
+    cartasE[2] = ""
+    cartasE[3] = ""
+    cartasE[4] = ""
+    cartasE[5] = ""
+    aux = 0
+    auxiliar = falso
+    enquanto(aux<6){
+      inteiro sorteado = u.sorteia(0, 39)
+      para(inteiro I=0;I<6;I++){
+        se(cartasE[I]==baralho[sorteado]){
+          auxiliar=verdadeiro
+        }
+      }  
+      se(auxiliar==falso){
+        cartasE[aux] = baralho[sorteado]
+        aux++
+      }
+    }
+  maos()
+  }
+  funcao maos(){
+    para(inteiro I=0;I<3;I++){  
+      cartasJ1[I] = cartasE[I] 
+      cartasJ2[I] = cartasE[I+3] 
+    }
+  }
+  funcao VencedorRodada(inteiro jogador1, inteiro jogador2){
+      se(jogador1 > jogador2){
+        rodadaP1++
+      }
+      senao se(jogador1 < jogador2){
+        rodadaP2++
+      }
+      senao se(jogador1 == jogador2){
+        rodadaP1++
+        rodadaP2++
+      }
+  }
+  funcao acharindice(){
+    para(inteiro I=0; I<40;I++){
+      se(cartaJogada1==baralho[I]){
+        jogador1 = pontuacao_cartas[I] 
+      }
+      se(cartaJogada2==baralho[I]){
+        jogador2 = pontuacao_cartas[I]
+      }
+    }
+  VencedorRodada(jogador1, jogador2)
+
   }
 }
 
